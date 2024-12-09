@@ -7,7 +7,7 @@ def cargar_datos():
     except FileNotFoundError:
         return {}
     
-def lector_datos():
+def mostrar_libro():
     libros = []
     with open("libros.json", "r") as archivo:
         libros = json.load(archivo)
@@ -49,5 +49,20 @@ def agregar_libro():
 
     print("El libro se ha añadido con éxito.")
 
-def buscar_libro():
-    
+# def modificar_libro():
+#     print("Título: 1.\nAutor: 2\nAño de publicación: 3\nEstrellas: 4\nPersonaje favorito: 5\nReseña: 6")
+#     dato=input("¿Qué dato desea modificar?")
+#     if dato=="1":
+
+
+
+
+while True:
+    print("BIENVENIDO AL DIARIO DE LECTURAS.\n1-Mostrar libros.\n2-Agregar libro.\n3-Modificar libro.\n4-Eliminar libro.\n5-Salir del programa.")
+    actividad=input("Qué actividad desea realizar?: ")
+    if actividad=="1":
+        mostrar_libro()
+    elif actividad=="2":
+        agregar_libro()
+    elif actividad=="3":
+        break
