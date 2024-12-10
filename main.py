@@ -7,15 +7,24 @@ def cargar_datos():
     except FileNotFoundError:
         return {}
     
+def lector_datos():
+    lista_datos=[]
+    with open("libros.json", "r") as lector:
+        lista_datos=json.load(lector)
+    return lista_datos
+
 def mostrar_libro():
-    libros = []
-    with open("libros.json", "r") as archivo:
-        libros = json.load(archivo)
-        print(libros)
+    datos=lector_datos()
+    print(datos)
 
 def agregar_libro():
-    libros=[]
+    try:
+        with open("libros.json", "r") as archivo:
+            libros = json.load(archivo)
+    except (FileNotFoundError, json.JSONDecodeError):
+        libros=[]        
     print("Añadir libro: ")
+    ID = max([libro["id"] for libro in libros], default=0) + 1
     titulo=input("Ingrese el título del libro: ")
     autor=input("Ingrese el autor del libro: ")
     while True:
@@ -36,6 +45,7 @@ def agregar_libro():
     reseña=input("Ingrese una reseña: ")
 
     nuevo_libro={
+        "ID" : ID,
         "Titulo" : titulo,
         "Autor" : autor,
         "Publicacion" : publicacion,
@@ -48,6 +58,9 @@ def agregar_libro():
         json.dump(libros,archivo)
 
     print("El libro se ha añadido con éxito.")
+    print(f"Libros registrados: \n{libros}")
+
+    
 
 # def modificar_libro():
 #     print("Título: 1.\nAutor: 2\nAño de publicación: 3\nEstrellas: 4\nPersonaje favorito: 5\nReseña: 6")
@@ -55,7 +68,7 @@ def agregar_libro():
 #     if dato=="1":
 
 
-
+libros=[]
 
 while True:
     print("BIENVENIDO AL DIARIO DE LECTURAS.\n1-Mostrar libros.\n2-Agregar libro.\n3-Modificar libro.\n4-Eliminar libro.\n5-Salir del programa.")
