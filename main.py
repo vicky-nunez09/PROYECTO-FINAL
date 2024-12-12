@@ -1,11 +1,4 @@
 import json
-
-def cargar_datos():
-    try:
-        with open("libros.json", "r") as archivo:
-            return json.load(archivo)
-    except FileNotFoundError:
-        return {}
     
 def lector_datos():
     lista_datos=[]
@@ -24,7 +17,7 @@ def agregar_libro():
     except (FileNotFoundError, json.JSONDecodeError):
         libros=[]        
     print("Añadir libro: ")
-    ID = max([libro["id"] for libro in libros], default=0) + 1
+    ID=max([libro['id'] for libro in archivo], default=0) + 1
     titulo=input("Ingrese el título del libro: ")
     autor=input("Ingrese el autor del libro: ")
     while True:
@@ -69,7 +62,6 @@ def agregar_libro():
 
 
 libros=[]
-
 while True:
     print("BIENVENIDO AL DIARIO DE LECTURAS.\n1-Mostrar libros.\n2-Agregar libro.\n3-Modificar libro.\n4-Eliminar libro.\n5-Salir del programa.")
     actividad=input("Qué actividad desea realizar?: ")
